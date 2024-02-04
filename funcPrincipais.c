@@ -76,7 +76,7 @@ int adicionarProdutos() {
         //
 
             textColor(WHITE, _BLACK);
-            gotoxy(31, 22); printf("Para retornar ao menu deixe qualquer campo em branco.");
+            gotoxy(29, 22); printf("Para retornar ao menu deixe qualquer campo em branco.");
 
             textColor(WHITE, _BLUE);
 
@@ -213,7 +213,7 @@ int adicionarProdutos() {
 
                 gotoxy(63, 18);  printf("                ");
                 gotoxy(63, 18); fgets(quantidade, 10, stdin);
-                
+
                 if(quantidade[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
                     textColor(WHITE, _BLACK);
                     system("cls");
