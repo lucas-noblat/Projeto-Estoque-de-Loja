@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "funcprincipais.h": "c",
+        "stdlib.h": "c",
+        "recgraficos.h": "c"
+    }
+}

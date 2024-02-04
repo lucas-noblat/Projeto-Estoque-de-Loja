@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "funcprincipais.h": "c",
+        "stdlib.h": "c",
+        "recgraficos.h": "c",
+        "stdio.h": "c",
+        "conio.h": "c",
+        "windows.h": "c",
+        "locale.h": "c",
+        "string.h": "c",
+        "lista.h": "c"
+    }
+}
