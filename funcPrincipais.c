@@ -322,6 +322,11 @@ void realizarVenda() {
         gotoxy(43, 12);
         textColor(WHITE, _BLUE);
         printf("DIGITE O CÓDIGO DO PRODUTO");
+        
+
+        textColor(WHITE, _BLACK);
+        gotoxy(38, 22); printf("Para retornar ao menu aperte enter");
+
         textColor(BLACK, _WHITE);
 
     //DEIXA CURSOR VISï¿½VEL
@@ -354,7 +359,14 @@ void realizarVenda() {
             delay(2);
             textColor(BLACK, _WHITE);
             gotoxy(44, 15); printf("                     ");
-            gotoxy(44, 15); fgets(codigo, 20, stdin); codigo[strlen(codigo)- 1] = '\0';
+            gotoxy(44, 15); fgets(codigo, 20, stdin);
+            
+            if (codigo[0] == '\n') {
+                textColor(WHITE, _BLACK);
+                system("cls");
+                return 0;
+            }
+         codigo[strlen(codigo)- 1] = '\0';
             continue;
 
         }
@@ -367,7 +379,14 @@ void realizarVenda() {
             delay(2);
             textColor(BLACK, _WHITE);
             gotoxy(44, 15); printf("                      ");
-            gotoxy(44, 15); fgets(codigo, 20, stdin); codigo[strlen(codigo)- 1] = '\0';
+            gotoxy(44, 15); fgets(codigo, 20, stdin);
+
+            if (codigo[0] == '\n') { //PARA RETORNAR AO MENU
+                textColor(WHITE, _BLACK);
+                system("cls");
+                return 0;
+            }
+             codigo[strlen(codigo)- 1] = '\0';
             continue;
 
         }
