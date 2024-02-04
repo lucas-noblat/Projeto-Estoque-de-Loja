@@ -18,7 +18,7 @@
     void delay(int segundos);
     int ehNumero (char palavra[]);
     int qntsDigitos(int x);
-    void adicionarProdutos ();
+    int adicionarProdutos ();
     void exibirEstoque ();
     void realizarVenda ();
     void alterarRegistro();

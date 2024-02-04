@@ -49,7 +49,7 @@ int qntsDigitos(int x){
     return res;
 }
 
-void adicionarProdutos() {
+int adicionarProdutos() {
 
             char codigo[20], preco[10], quantidade[10];
 
@@ -73,6 +73,13 @@ void adicionarProdutos() {
             gotoxy(31, 15);printf("Digite o preço do produto: ");
             gotoxy(31, 18);printf("Digite a quantidade do produto: ");
 
+        //
+
+            textColor(WHITE, _BLACK);
+            gotoxy(31, 22); printf("Para retornar ao menu deixe qualquer campo em branco.");
+
+            textColor(WHITE, _BLUE);
+
             CONSOLE_CURSOR_INFO info;
             info.bVisible = true;
             info.dwSize = 100;
@@ -81,7 +88,16 @@ void adicionarProdutos() {
 
         //RECEBE O CODIGO E FAZ A DEFESA
 
-            gotoxy(59, 9); fgets(codigo, 20, stdin); codigo[strlen(codigo) - 1] = '\0';
+            gotoxy(59, 9); fgets(codigo, 20, stdin); 
+
+            if(codigo[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
+                textColor(WHITE, _BLACK);
+                system("cls");
+                return 0;
+
+            }
+            
+            codigo[strlen(codigo) - 1] = '\0';
 
             while(1){
 
@@ -97,7 +113,7 @@ void adicionarProdutos() {
                 continue;
                 }
             
-            if (buscaCodigo(&estoque, atoi(codigo))) {
+            else if (buscaCodigo(&estoque, atoi(codigo))) {
                 gotoxy(59, 9);
                 textColor(GREEN, _BLUE);
                 printf("Código existente");
@@ -107,7 +123,7 @@ void adicionarProdutos() {
                 gotoxy(58, 9);  printf("                 ");
                 gotoxy(59, 9); fgets(codigo, 20, stdin); codigo[strlen(codigo) - 1] = '\0';
                 continue;
-                }
+                } 
 
                 break;
             }
@@ -117,13 +133,28 @@ void adicionarProdutos() {
 
         //NOME -- NÃƒO TEM DEFESA NO NOME POIS O NOME PODE SER ACOMPANHADO DA PESAGEM 'ARROZ 5KG'
 
-            gotoxy(57, 12); fgets(regist.nome, 50, stdin);        
+            gotoxy(57, 12); fgets(regist.nome, 50, stdin);  
+
+              if(regist.nome[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
+                textColor(WHITE, _BLACK);
+                system("cls");
+                return 0;
+
+            }      
             regist.nome[strlen(regist.nome) - 1] = '\0';
             
 
         //RECEBE O PRECO E FAZ A DEFESA
 
-            gotoxy(59,15); fgets(preco, 10, stdin); preco[strlen(preco) - 1] = '\0';
+            gotoxy(59,15); fgets(preco, 10, stdin);
+            
+              if(preco[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
+                textColor(WHITE, _BLACK);
+                system("cls");
+                return 0;
+
+            }  
+             preco[strlen(preco) - 1] = '\0';
 
             while (!ehNumero(preco) || atof(preco) <= 0) {
                 gotoxy(59, 15);
@@ -140,7 +171,14 @@ void adicionarProdutos() {
 
         //RECEBE QUANTIDADE E FAZ A DEFESA
 
-            gotoxy(63,18); fgets(quantidade, 10, stdin); quantidade[strlen(quantidade) - 1] = '\0';
+            gotoxy(63,18); fgets(quantidade, 10, stdin);
+            
+            if(quantidade[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
+                textColor(WHITE, _BLACK);
+                system("cls");
+                return 0;
+
+            }   quantidade[strlen(quantidade) - 1] = '\0';
 
 
             while (!ehNumero(quantidade) || atoi(quantidade) < 0) {
@@ -179,6 +217,7 @@ void adicionarProdutos() {
             printf("Pressione qualquer tecla para voltar ao menu...");
             getchar();
             system("cls");
+            return 1;
 
 }
 
