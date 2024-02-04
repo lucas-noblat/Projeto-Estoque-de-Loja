@@ -21,7 +21,7 @@
     int adicionarProdutos ();
     void exibirEstoque ();
     void realizarVenda ();
-    void alterarRegistro();
+    int alterarRegistro();
 
 
 

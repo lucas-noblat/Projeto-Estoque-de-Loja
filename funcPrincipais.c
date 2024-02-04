@@ -255,7 +255,7 @@ void realizarVenda() {
                 system("cls");
 }
 
-    void alterarRegistro(){
+    int alterarRegistro(){
 
         char codigo [20], preco[10], quantidade[10];
         char listaOpcoes[4][40] = {
@@ -301,7 +301,16 @@ void realizarVenda() {
     
     //RECEBE O Cï¿½DIGO E FAZ A DEFESA
 
-        gotoxy(44, 15); fgets(codigo, 20, stdin); codigo[strlen(codigo)- 1] = '\0';
+        gotoxy(44, 15); fgets(codigo, 20, stdin); 
+        
+        if (codigo[0] == '\n')
+        {
+            textColor(WHITE, _BLACK);
+            system("cls");
+            return 0;
+        }
+        
+        codigo[strlen(codigo)- 1] = '\0';
         
         while(1){
         
@@ -323,7 +332,7 @@ void realizarVenda() {
             
             textColor(RED, _WHITE);
             gotoxy(44, 15); printf("                   ");
-            gotoxy(45, 15); printf("Código nÃo encontrado");
+            gotoxy(45, 15); printf("Código não encontrado");
             delay(2);
             textColor(BLACK, _WHITE);
             gotoxy(44, 15); printf("                      ");
