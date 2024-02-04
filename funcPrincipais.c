@@ -109,7 +109,14 @@ int adicionarProdutos() {
                 textColor(WHITE, _BLUE);
 
                 gotoxy(58, 9);  printf("                ");
-                gotoxy(59, 9); fgets(codigo, 20, stdin); codigo[strlen(codigo) - 1] = '\0';
+                gotoxy(59, 9); fgets(codigo, 20, stdin); 
+
+                if(codigo[0] == '\n') {//PARA RETORNAR AO MENU PRINCIPAL
+                    textColor(WHITE, _BLACK);
+                    system("cls");
+                    return 0;
+                }       
+                codigo[strlen(codigo) - 1] = '\0';
                 continue;
                 }
             
@@ -121,7 +128,15 @@ int adicionarProdutos() {
                 textColor(WHITE, _BLUE);
 
                 gotoxy(58, 9);  printf("                 ");
-                gotoxy(59, 9); fgets(codigo, 20, stdin); codigo[strlen(codigo) - 1] = '\0';
+                gotoxy(59, 9); fgets(codigo, 20, stdin);
+
+                if(codigo[0] == '\n') {//PARA RETORNAR AO MENU PRINCIPAL
+                    textColor(WHITE, _BLACK);
+                    system("cls");
+                    return 0;
+                }
+
+                codigo[strlen(codigo) - 1] = '\0';
                 continue;
                 } 
 
@@ -164,7 +179,15 @@ int adicionarProdutos() {
                 textColor(WHITE, _BLUE);
 
                 gotoxy(58, 15);  printf("                ");
-                gotoxy(59, 15); fgets(preco, 10, stdin); preco[strlen(preco) - 1] = '\0';
+                gotoxy(59, 15); fgets(preco, 10, stdin);
+
+                if(preco[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
+                    textColor(WHITE, _BLACK);
+                    system("cls");
+                    return 0;
+
+            }
+             preco[strlen(preco) - 1] = '\0';
                 }
 
             regist.preco = atof(preco);
@@ -189,7 +212,15 @@ int adicionarProdutos() {
                 textColor(WHITE, _BLUE);
 
                 gotoxy(63, 18);  printf("                ");
-                gotoxy(63, 18); fgets(quantidade, 10, stdin); quantidade[strlen(quantidade) - 1] = '\0';
+                gotoxy(63, 18); fgets(quantidade, 10, stdin);
+                
+                if(quantidade[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
+                    textColor(WHITE, _BLACK);
+                    system("cls");
+                    return 0;
+
+            }   
+                 quantidade[strlen(quantidade) - 1] = '\0';
                 }
             
             regist.quantidade = atoi(quantidade);
