@@ -50,8 +50,7 @@ int main() {
                 break;
             case 4:
             
-                salvarLista(&estoque);
-               // realizarVenda();
+                realizarVenda(&estoque);
                 break;
             case 5:
                 system("cls");

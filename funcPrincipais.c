@@ -271,7 +271,146 @@ void exibirEstoque() {
 }
 
 // FunÃ§Ã£o para realizar uma venda
-void realizarVenda() {
+int realizarVenda() {
+
+            char codigo [20], preco[10], quantidade[10];
+        char listaOpcoes[4][40] = {
+            "ALTERAR CÓDIGO",
+            "ALTERAR NOME",
+            "ALTERAR PREÇO",
+            "ALTERAR QUANTIDADE"
+            
+        }; PONT produtoAchado;
+
+        int opcAlterarRegist;
+        
+    //MONTA A BOX AZUL DA ESQUERDA
+
+        system("cls");
+        setlocale(LC_ALL, "C");
+        textColor(WHITE, _BLUE);
+        box(9, 37, 28, 75);
+       
+        textColor(WHITE, _BLUE);
+        gotoxy(43, 12);
+        setlocale(LC_ALL, "Portuguese_Brazil");
+
+    //MONTA A BOX DO CARRINHO
+
+        setlocale(LC_ALL, "C");
+        textColor(BLACK, _WHITE);
+        box(9, 78, 28, 100);
+       
+        textColor(BLACK, _WHITE);
+        gotoxy(79, 9); printf("------CARRINHO------");
+        setlocale(LC_ALL, "Portuguese_Brazil");
+
+
+
+
+
+        if(estoque.tam == 0){ 
+            gotoxy(49, 14);
+            printf("Lista Vazia!");
+            delay(4);
+            textColor(WHITE, _BLACK);
+            system("cls");
+
+        } else {
+             textColor(WHITE, _WHITE);
+        box(15, 44, 17, 68);
+        gotoxy(47, 12);
+        textColor(WHITE, _BLUE);
+        printf("CÓDIGO DO PRODUTO");
+        gotoxy(43, 19); printf("QUANTIDADE A SER VENDIDA");
+
+    //SEGUNDA BOX BRANCA
+
+        textColor(WHITE, _WHITE);
+        setlocale(LC_ALL, "C");
+        box(22, 44, 24, 68);
+        textColor(WHITE, _WHITE);
+        setlocale(LC_ALL, "Portuguese_Brazil");
+        textColor(BLACK, _WHITE);
+    //DEIXA CURSOR VISï¿½VEL
+        CONSOLE_CURSOR_INFO info;
+        info.bVisible = true;
+        info.dwSize = 100;
+        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+    
+    //RECEBE O Cï¿½DIGO E FAZ A DEFESA
+
+        gotoxy(44, 15); fgets(codigo, 20, stdin); 
+        
+        if (codigo[0] == '\n')
+        {
+            textColor(WHITE, _BLACK);
+            system("cls");
+            return 0;
+        }
+        
+        codigo[strlen(codigo)- 1] = '\0';
+        
+        while(1){
+        
+        if(!ehNumero(codigo)) {
+
+            
+            textColor(RED, _WHITE);
+            gotoxy(44, 15); printf("                  ");
+            gotoxy(48, 15); printf("Número inválido");
+            delay(2);
+            textColor(BLACK, _WHITE);
+            gotoxy(44, 15); printf("                     ");
+            gotoxy(44, 15); fgets(codigo, 20, stdin);
+            
+            if (codigo[0] == '\n') {
+                textColor(WHITE, _BLACK);
+                system("cls");
+                return 0;
+            }
+         codigo[strlen(codigo)- 1] = '\0';
+            continue;
+
+        }
+             if(!(produtoAchado = buscaCodigo(&estoque, atoi(codigo)))) {
+
+            
+            textColor(RED, _WHITE);
+            gotoxy(44, 15); printf("                   ");
+            gotoxy(45, 15); printf("Código não encontrado");
+            delay(2);
+            textColor(BLACK, _WHITE);
+            gotoxy(44, 15); printf("                      ");
+            gotoxy(44, 15); fgets(codigo, 20, stdin);
+
+            if (codigo[0] == '\n') { //PARA RETORNAR AO MENU
+                textColor(WHITE, _BLACK);
+                system("cls");
+                return 0;
+            }
+             codigo[strlen(codigo)- 1] = '\0';
+            continue;
+
+        }
+
+        
+
+        break;
+        }
+    //DEIXA CURSOR INVISï¿½VEL
+
+        info.bVisible = false;
+        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+        textColor(WHITE, _BLACK);
+        system("cls");
+             
+
+
+
+
+
+    /* EXCLUIR ALGO
                 system("cls");
 
                     printf("Digite o codigo do produto a ser removido: ");
@@ -280,11 +419,14 @@ void realizarVenda() {
                 if (removido){
                     printf("Elemento removido: %d", removido->reg.codigo);
                     free(removido);
+                    getchar();
                 } else {
                     printf("Elemento não esta na lista\n");
+                    getchar();
                 }
                 system("cls");
-}
+                */
+}}
 
     int alterarRegistro(){
 

@@ -20,7 +20,7 @@
     int qntsDigitos(int x);
     int adicionarProdutos ();
     void exibirEstoque ();
-    void realizarVenda ();
+    int realizarVenda ();
     int alterarRegistro();
 
 
