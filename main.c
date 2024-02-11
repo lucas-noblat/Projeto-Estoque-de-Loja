@@ -16,6 +16,7 @@
             "REALIZAR VENDA",
             "SAIR"
     };
+    
 
 int main() {
 
@@ -29,8 +30,7 @@ int main() {
 
     do {
 
-        textColor(WHITE, _BLUE);
-        opcao = menu(10, 45, 5, listaOpcoes);
+        opcao = menu(10, 45, 5, listaOpcoes, WHITE, _BLUE);
 
 
         switch (opcao) {
@@ -53,11 +53,11 @@ int main() {
                 realizarVenda(&estoque);
                 break;
             case 5:
+                
+                textColor(WHITE, _BLACK);
                 system("cls");
-                textColor(WHITE, _BLUE);
-                setlocale(LC_ALL, "C");
-                box(12 ,43 , 16 , 69);
-                for (int i = 4; i > 0; i--){
+                box(12 ,43 , 16 , 69, WHITE, _BLUE);
+                for (int i = 3; i > 0; i--){
                 gotoxy(43, 13);     
                 printf("Fechando o programa em %d", i);
                 delay(1);

@@ -3,14 +3,14 @@
 #include <windows.h>
 
 void linhaCol (int lin, int col);
-void box (int lin1, int col1, int lin2, int col2);
-int menu(int lin1, int col1, int qtd, char listaOpcoes[][40]);
+void box (int lin1, int col1, int lin2, int col2, int cor_letra, int cor_fundo);
+int menu(int lin1, int col1, int qtd, char listaOpcoes[][40], int cor_letra, int cor_fundo);
 
 COORD size;
 HANDLE h;
 
 
-enum {
+enum letter_collor {
 
     BLACK,  
     BLUE,   
@@ -31,7 +31,7 @@ enum {
 
 };
 
-enum {
+enum background_collor {
 
     _BLACK=0,  
     _BLUE=16,   

@@ -84,9 +84,10 @@ void salvarLista(LISTA * l){
 
         if(!(arquivoRec = fopen("arquivoLista.dat", "rb"))){
 
-            printf("Erro de alocação de memória");
+            arquivoRec = fopen("arquivoLista.dat", "wb");
 
-        } else {
+        }   
+        else {
 
             while (!feof(arquivoRec)){
                 if (fread(&regRestaurado, sizeof(REGISTRO), 1, arquivoRec)) {

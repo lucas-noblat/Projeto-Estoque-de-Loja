@@ -52,54 +52,53 @@ int qntsDigitos(int x){
 int adicionarProdutos() {
 
             char codigo[20], preco[10], quantidade[10];
+    //LIMPA A TELA DO CONSOLE
+        textColor(WHITE, _BLACK);
+        system("cls");
+        
+  
+    //MONTA A BOX
 
-        //LIMPA A TELA E DEFINE AS CORES ONDE SERA PRINTADO ALGO
-            system("cls");
+        box(8, 30, 21, 80, WHITE, _BLUE);
 
-        //MONTA A BOX
-            setlocale(LC_ALL, "C");
-            textColor(WHITE, _BLUE);
-            box(8, 30, 21, 80);
-            setlocale(LC_ALL, "Portuguese_Brazil");
+    //PEGA O TEMPO PARA SER ECXPOSTO
+        time(&segundos);
+        hora_atual = localtime(&segundos); 
 
-        //PEGA O TEMPO PARA SER ECXPOSTO
-            time(&segundos);
-            hora_atual = localtime(&segundos); 
+    //PRINTA AS PERGUNTAS E RECEBE AS RESPOSTAS
 
-        //PRINTA AS PERGUNTAS E RECEBE AS RESPOSTAS
-
-            gotoxy(31, 9);printf("Digite o código do produto: ");
-            gotoxy(31, 12);printf("Digite o nome do produto: ");
-            gotoxy(31, 15);printf("Digite o preço do produto: ");
-            gotoxy(31, 18);printf("Digite a quantidade do produto: ");
+        gotoxy(31, 9);printf("Digite o código do produto: ");
+        gotoxy(31, 12);printf("Digite o nome do produto: ");
+        gotoxy(31, 15);printf("Digite o preço do produto: ");
+        gotoxy(31, 18);printf("Digite a quantidade do produto: ");
 
         //
 
+        textColor(WHITE, _BLACK);
+        gotoxy(29, 22); printf("Para retornar ao menu deixe qualquer campo em branco.");
+
+        textColor(WHITE, _BLUE);
+
+        CONSOLE_CURSOR_INFO info;
+        info.bVisible = true;
+        info.dwSize = 100;
+        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+            
+
+    //RECEBE O CODIGO E FAZ A DEFESA
+
+        gotoxy(59, 9); fgets(codigo, 20, stdin); 
+
+        if(codigo[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
             textColor(WHITE, _BLACK);
-            gotoxy(29, 22); printf("Para retornar ao menu deixe qualquer campo em branco.");
+            system("cls");
+            return 0;
 
-            textColor(WHITE, _BLUE);
-
-            CONSOLE_CURSOR_INFO info;
-            info.bVisible = true;
-            info.dwSize = 100;
-            SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+         }
             
+        codigo[strlen(codigo) - 1] = '\0';
 
-        //RECEBE O CODIGO E FAZ A DEFESA
-
-            gotoxy(59, 9); fgets(codigo, 20, stdin); 
-
-            if(codigo[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
-                textColor(WHITE, _BLACK);
-                system("cls");
-                return 0;
-
-            }
-            
-            codigo[strlen(codigo) - 1] = '\0';
-
-            while(1){
+        while(1){
 
             if (ehNumero(codigo) ==0 || atoi(codigo) < 0) {
                 gotoxy(59, 9);
@@ -112,36 +111,36 @@ int adicionarProdutos() {
                 gotoxy(59, 9); fgets(codigo, 20, stdin); 
 
                 if(codigo[0] == '\n') {//PARA RETORNAR AO MENU PRINCIPAL
-                    textColor(WHITE, _BLACK);
-                    system("cls");
-                    return 0;
-                }       
-                codigo[strlen(codigo) - 1] = '\0';
-                continue;
-                }
+                        textColor(WHITE, _BLACK);
+                        system("cls");
+                        return 0;
+                    }       
+                    codigo[strlen(codigo) - 1] = '\0';
+                    continue;
+                    }
             
-            else if (buscaCodigo(&estoque, atoi(codigo))) {
-                gotoxy(59, 9);
-                textColor(GREEN, _BLUE);
-                printf("Código existente");
-                delay(2);
-                textColor(WHITE, _BLUE);
+                else if (buscaCodigo(&estoque, atoi(codigo))) {
+                    gotoxy(59, 9);
+                    textColor(GREEN, _BLUE);
+                    printf("Código existente");
+                    delay(2);
+                    textColor(WHITE, _BLUE);
 
-                gotoxy(58, 9);  printf("                 ");
-                gotoxy(59, 9); fgets(codigo, 20, stdin);
+                    gotoxy(58, 9);  printf("                 ");
+                    gotoxy(59, 9); fgets(codigo, 20, stdin);
 
-                if(codigo[0] == '\n') {//PARA RETORNAR AO MENU PRINCIPAL
-                    textColor(WHITE, _BLACK);
-                    system("cls");
-                    return 0;
+                    if(codigo[0] == '\n') {//PARA RETORNAR AO MENU PRINCIPAL
+                        textColor(WHITE, _BLACK);
+                        system("cls");
+                        return 0;
+                    }
+
+                    codigo[strlen(codigo) - 1] = '\0';
+                    continue;
+                    } 
+
+                    break;
                 }
-
-                codigo[strlen(codigo) - 1] = '\0';
-                continue;
-                } 
-
-                break;
-            }
 
             regist.codigo = atoi(codigo);                           //CONVERTE STRING P INT
 
@@ -245,7 +244,6 @@ int adicionarProdutos() {
 
             
 
-            printf("Pressione qualquer tecla para voltar ao menu...");
             getchar();
             system("cls");
             return 1;
@@ -254,16 +252,16 @@ int adicionarProdutos() {
 
 // FunÃ§Ã£o para exibir o estoque atual
 void exibirEstoque() {
+
+    //LIMPA A TELA DO CONSOLE
+        textColor(WHITE, _BLACK);
         system("cls");
 
-        
-        textColor(WHITE, _BLUE);
-        setlocale(LC_ALL, "C");
-        box(6, 10, 2*(estoque.tam+1) + 7 , 105);
-        setlocale(LC_ALL, "Portuguese_Brazil");
+    //  DEFINE AS ESTRUTURAS
+        box(6, 10, estoque.tam + 9 , 105, WHITE, _BLUE);
         mostrarLista(&estoque);
         textColor(WHITE, _BLACK);
-        gotoxy(37, 2*(estoque.tam+1) + 8);
+        gotoxy(37, estoque.tam + 11);
         printf("Pressione enter para voltar ao menu...");
         getchar();
         textColor(WHITE, _BLACK);
@@ -283,27 +281,22 @@ int realizarVenda() {
         }; PONT produtoAchado;
 
         int opcAlterarRegist;
+    //LIMPA A TELA DO CONSOLE
+        textColor(WHITE, _BLACK);
+        system("cls");
         
     //MONTA A BOX AZUL DA ESQUERDA
 
-        system("cls");
-        setlocale(LC_ALL, "C");
-        textColor(WHITE, _BLUE);
-        box(9, 37, 28, 75);
-       
-        textColor(WHITE, _BLUE);
+        
+        box(9, 37, 28, 75, WHITE, _BLUE);
         gotoxy(43, 12);
-        setlocale(LC_ALL, "Portuguese_Brazil");
+        
 
     //MONTA A BOX DO CARRINHO
 
-        setlocale(LC_ALL, "C");
-        textColor(BLACK, _WHITE);
-        box(9, 78, 28, 100);
-       
-        textColor(BLACK, _WHITE);
+        box(9, 78, 28, 100, BLACK, _WHITE);
+
         gotoxy(79, 9); printf("------CARRINHO------");
-        setlocale(LC_ALL, "Portuguese_Brazil");
 
 
 
@@ -318,7 +311,7 @@ int realizarVenda() {
 
         } else {
              textColor(WHITE, _WHITE);
-        box(15, 44, 17, 68);
+        box(15, 44, 17, 68, WHITE, _WHITE);
         gotoxy(47, 12);
         textColor(WHITE, _BLUE);
         printf("CÓDIGO DO PRODUTO");
@@ -326,11 +319,8 @@ int realizarVenda() {
 
     //SEGUNDA BOX BRANCA
 
-        textColor(WHITE, _WHITE);
-        setlocale(LC_ALL, "C");
-        box(22, 44, 24, 68);
-        textColor(WHITE, _WHITE);
-        setlocale(LC_ALL, "Portuguese_Brazil");
+        box(22, 44, 24, 68, WHITE, _WHITE);
+
         textColor(BLACK, _WHITE);
     //DEIXA CURSOR VISï¿½VEL
         CONSOLE_CURSOR_INFO info;
@@ -441,35 +431,35 @@ int realizarVenda() {
 
         int opcAlterarRegist;
         
-    //MONTA A TELA ONDE IRï¿½ PEGAR O Cï¿½DIGO 
+    //MONTA A TELA ONDE IRï¿½ PEGAR O Cï¿½DIGO
 
-        system("cls");
-        setlocale(LC_ALL, "C");
-        textColor(WHITE, _BLUE);
-        box(8, 37, 21, 75);
+        
        
-        textColor(WHITE, _BLUE);
-        gotoxy(43, 12);
-        setlocale(LC_ALL, "Portuguese_Brazil");
         if(estoque.tam == 0){ 
             gotoxy(49, 14);
             printf("Lista Vazia!");
             delay(4);
-            textColor(WHITE, _BLACK);
-            system("cls");
-
+     
+    
         } else {
-             textColor(WHITE, _WHITE);
-        box(15, 44, 17, 68);
+
+        textColor(WHITE, _BLACK);
+        system("cls");
+        box(8, 37, 21, 75, WHITE, _BLUE);
+        box(15, 44, 17, 68, WHITE, _WHITE);
+      
         gotoxy(43, 12);
         textColor(WHITE, _BLUE);
         printf("DIGITE O CÓDIGO DO PRODUTO");
-        
+    
 
         textColor(WHITE, _BLACK);
-        gotoxy(38, 22); printf("Para retornar ao menu aperte enter");
 
-        textColor(BLACK, _WHITE);
+        gotoxy(38, 21); printf("Para retornar ao menu aperte enter");
+
+        textColor(WHITE, _BLUE);
+
+        
 
     //DEIXA CURSOR VISï¿½VEL
         CONSOLE_CURSOR_INFO info;
@@ -479,9 +469,10 @@ int realizarVenda() {
     
     //RECEBE O Cï¿½DIGO E FAZ A DEFESA
 
+        textColor(BLACK, _WHITE);
         gotoxy(44, 15); fgets(codigo, 20, stdin); 
         
-        if (codigo[0] == '\n')
+        if (codigo[0] == '\n')          //PARA VOLTAR AO MENU
         {
             textColor(WHITE, _BLACK);
             system("cls");
@@ -550,18 +541,16 @@ int realizarVenda() {
          do {
 
     //MONTA A BOX DOS ATRIBUTOS DO PRODUTO
-        setlocale(LC_ALL, "C");
-        textColor(WHITE, _BLUE);
-        box(10, 30, 20 , 70);
-        setlocale(LC_ALL, "Portuguese_Brazil");
+        box(10, 30, 20 , 70, WHITE, _BLUE);
+    
+    //RECEBE OS VALORES DO REGISTRO
+
         gotoxy(32,11);printf("Código: %d", produtoAchado->reg.codigo);
         gotoxy(32, 13); printf("Nome: %s", produtoAchado->reg.nome);
         gotoxy(32, 15); printf("Preço: %.2f", produtoAchado->reg.preco);
         gotoxy(32, 17); printf("Quantidade: %d", produtoAchado->reg.quantidade);
         
-
-        textColor(WHITE, _BLUE);
-        opcAlterarRegist = menu(10, 70, 4, listaOpcoes);
+        opcAlterarRegist = menu(10, 70, 4, listaOpcoes, WHITE, _BLUE);
   
 ;
 

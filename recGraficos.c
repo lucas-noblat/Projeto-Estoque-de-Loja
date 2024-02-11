@@ -6,6 +6,7 @@
 #include "funcPrincipais.h"
 
 
+
 void linhaCol (int lin, int col) {
 
     SetConsoleCursorPosition(
@@ -21,8 +22,15 @@ void linhaCol (int lin, int col) {
     
 }
 
-void box(int lin1, int col1, int lin2, int col2){
+void box(int lin1, int col1, int lin2, int col2, int cor_letra, int cor_fundo){
 
+
+    textColor(cor_letra, cor_fundo);    //DEFINE COR DE FUNDO
+
+    
+    setlocale(LC_ALL, "C");
+  
+    
     int i, j, tamlin, tamcol;
 
     //Acha o tamanho da box;
@@ -60,6 +68,10 @@ void box(int lin1, int col1, int lin2, int col2){
     linhaCol(lin1, col2); printf("%c", 191);
     linhaCol(lin2, col1); printf("%c", 192);
     linhaCol(lin2, col2); printf("%c", 217);
+
+   //PADR�O PROGRAMA
+    setlocale(LC_ALL, "Portuguese_Brazil");
+
 }
 
 
@@ -68,9 +80,10 @@ void textColor(int letras, int fundo) {
 }
 
 
-int menu (int lin1, int col1, int qtd, char lista[][40]){
+int menu (int lin1, int col1, int qtd, char lista[][40], int cor_letra, int cor_fundo){
 
     int lin2, col2, linha, i, tamMaxItem, tecla, opc=1;
+    textColor(cor_fundo, cor_fundo);
 
 
     //CALCULA AS COORDENADAS
@@ -86,7 +99,7 @@ int menu (int lin1, int col1, int qtd, char lista[][40]){
     //MONTA TELA
 
     setlocale(LC_ALL, "C");
-    box(lin1, col1, lin2, col2);
+    box(lin1, col1, lin2, col2, cor_letra, cor_fundo);
     setlocale(LC_ALL, "Portuguese_Brazil");
 
     //LAÇO DAS OPÇÕES
@@ -102,7 +115,7 @@ int menu (int lin1, int col1, int qtd, char lista[][40]){
                 }
 
             else {
-                textColor(WHITE, _BLUE);
+                textColor(cor_letra, cor_fundo);
                 }
             linhaCol(linha, col1+2);
             printf("%s", lista[i]);
@@ -135,7 +148,6 @@ int menu (int lin1, int col1, int qtd, char lista[][40]){
     
 
     setlocale(LC_ALL, "Portuguese_Brazil");
-    textColor(WHITE, _BLACK);
     return opc;
 } 
 void gotoxy(int x, int y){
