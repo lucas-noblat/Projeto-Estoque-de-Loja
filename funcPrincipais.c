@@ -10,9 +10,62 @@
 #include <conio.h>
 #include <ctype.h>
 
-// FunÃ§Ã£o para adicionar produtos ao estoque
+// FUNÇÃO PARA DEFENDER A ENTRADA DOS CÓDIGOS
 
+int defesaCodigo (char codigo[], char message[], int x, int y, PONT foundProduct){
 
+    int loop = 0;
+
+    while(loop != 1){
+
+        if (codigo[0] == '\n'){
+
+            textColor(BLACK, _BLACK);
+            system("cls");
+            return 0;}
+
+        codigo[strlen(codigo)- 1] = '\0';   
+
+        if(!ehNumero(codigo)){
+                    
+            textColor(RED, _WHITE);
+            gotoxy(x, y); printf("                  ");
+            gotoxy(x + 3, y); printf("Número inválido");
+            delay(2);
+            textColor(BLACK, _WHITE);
+            gotoxy(x, y); printf("                     ");
+            gotoxy(x, y); fgets(codigo, 20, stdin);
+            if (codigo[0] == '\n') {
+                
+                textColor(BLACK, _BLACK);
+                system("cls");
+                return 0;}
+            continue;}
+
+        else if(!(foundProduct = buscaCodigo(&estoque, atoi(codigo)))) {   //VERIFICA SE ESTÁ NA LISTA
+
+            textColor(RED, _WHITE);
+            gotoxy(x, y); printf("                   ");
+            gotoxy(x+1, y); printf("Código não encontrado");
+            delay(2);
+            textColor(BLACK, _WHITE);
+            gotoxy(x, y); printf("                      ");
+            gotoxy(x, y); fgets(codigo, 20, stdin);
+            if (codigo[0] == '\n'){
+
+                textColor(BLACK, _BLACK);
+                system("cls");
+                return 0;}
+            continue; }
+        
+        loop = 1;}
+    return 1;
+}  
+
+       
+        
+        
+        
 
 void delay(int segundos)
 {
@@ -27,6 +80,9 @@ void delay(int segundos)
         ;
 }
 
+
+
+
 int ehNumero (char palavra[]){
     int res = 1;
 
@@ -39,6 +95,9 @@ int ehNumero (char palavra[]){
     return res;
 }
 
+
+
+
 int qntsDigitos(int x){
     int res = 1;
 
@@ -48,6 +107,10 @@ int qntsDigitos(int x){
     }
     return res;
 }
+
+
+
+
 
 int adicionarProdutos() {
 
@@ -250,6 +313,15 @@ int adicionarProdutos() {
 
 }
 
+
+
+
+
+
+
+
+
+
 // FunÃ§Ã£o para exibir o estoque atual
 void exibirEstoque() {
 
@@ -266,21 +338,35 @@ void exibirEstoque() {
         getchar();
         textColor(WHITE, _BLACK);
         system("cls");
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
-// FunÃ§Ã£o para realizar uma venda
+/*
+
+            REALIZAR VENDA
+            REALIZAR VENDA
+            REALIZAR VENDA
+ */
+
+
 int realizarVenda() {
 
-            char codigo [20], preco[10], quantidade[10];
-        char listaOpcoes[4][40] = {
-            "ALTERAR CÓDIGO",
-            "ALTERAR NOME",
-            "ALTERAR PREÇO",
-            "ALTERAR QUANTIDADE"
-            
-        }; PONT produtoAchado;
+    CONSOLE_CURSOR_INFO info;
+    char codigo [20];
+    PONT produtoAchado;
 
-        int opcAlterarRegist;
     //LIMPA A TELA DO CONSOLE
         textColor(WHITE, _BLACK);
         system("cls");
@@ -289,18 +375,11 @@ int realizarVenda() {
 
         
         box(9, 37, 28, 75, WHITE, _BLUE);
-        gotoxy(43, 12);
-        
-
-    //MONTA A BOX DO CARRINHO
-
-        box(9, 78, 28, 100, BLACK, _WHITE);
-
-        gotoxy(79, 9); printf("------CARRINHO------");
+       
 
 
 
-
+    //CONFERE SE TEM ALGO NO ESTOQUE OU NÃO
 
         if(estoque.tam == 0){ 
             gotoxy(49, 14);
@@ -310,97 +389,66 @@ int realizarVenda() {
             system("cls");
 
         } else {
-             textColor(WHITE, _WHITE);
+
+//MONTAGEM DA BOX QUE RECOLHE OS DADOS
+
+    //Primeira box branca
         box(15, 44, 17, 68, WHITE, _WHITE);
-        gotoxy(47, 12);
+
+       
+    //ESCREVE AS INFORMAÇÕES EXIGIDAS
+
         textColor(WHITE, _BLUE);
-        printf("CÓDIGO DO PRODUTO");
+        gotoxy(47, 12);printf("CÓDIGO DO PRODUTO");
         gotoxy(43, 19); printf("QUANTIDADE A SER VENDIDA");
+
 
     //SEGUNDA BOX BRANCA
 
         box(22, 44, 24, 68, WHITE, _WHITE);
+ 
 
-        textColor(BLACK, _WHITE);
-    //DEIXA CURSOR VISï¿½VEL
-        CONSOLE_CURSOR_INFO info;
-        info.bVisible = true;
-        info.dwSize = 100;
-        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
-    
-    //RECEBE O Cï¿½DIGO E FAZ A DEFESA
+ 
+ 
 
-        gotoxy(44, 15); fgets(codigo, 20, stdin); 
-        
-        if (codigo[0] == '\n')
-        {
-            textColor(WHITE, _BLACK);
-            system("cls");
-            return 0;
-        }
-        
-        codigo[strlen(codigo)- 1] = '\0';
+   //MONTAGEM DA INTERFACE
         
         while(1){
-        
-        if(!ehNumero(codigo)) {
 
-            
-            textColor(RED, _WHITE);
-            gotoxy(44, 15); printf("                  ");
-            gotoxy(48, 15); printf("Número inválido");
-            delay(2);
+            //MONTA A BOX DO CARRINHO
+
+            box(9, 78, 28, 100, BLACK, _WHITE);
+            linhaReta(78, 100, 11, BLACK, _WHITE);
+
+            gotoxy(85, 9); printf("CARRINHO");
+
+    //DEIXA CURSOR VISï¿½VEL
+
+
+            info.bVisible = true;
+            info.dwSize = 100;
+            SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+
+    
             textColor(BLACK, _WHITE);
-            gotoxy(44, 15); printf("                     ");
-            gotoxy(44, 15); fgets(codigo, 20, stdin);
-            
-            if (codigo[0] == '\n') {
-                textColor(WHITE, _BLACK);
-                system("cls");
-                return 0;
+            gotoxy(44, 15); fgets(codigo, 20, stdin); 
+
+
+            if (defesaCodigo(codigo, "CÓDIGO DO PRODUTO", 44, 15, produtoAchado) == 0) return 0;
+
             }
-         codigo[strlen(codigo)- 1] = '\0';
-            continue;
 
-        }
-             if(!(produtoAchado = buscaCodigo(&estoque, atoi(codigo)))) {
-
-            
-            textColor(RED, _WHITE);
-            gotoxy(44, 15); printf("                   ");
-            gotoxy(45, 15); printf("Código não encontrado");
-            delay(2);
-            textColor(BLACK, _WHITE);
-            gotoxy(44, 15); printf("                      ");
-            gotoxy(44, 15); fgets(codigo, 20, stdin);
-
-            if (codigo[0] == '\n') { //PARA RETORNAR AO MENU
-                textColor(WHITE, _BLACK);
-                system("cls");
-                return 0;
-            }
-             codigo[strlen(codigo)- 1] = '\0';
-            continue;
-
-        }
-
-        
-
-        break;
-        }
+     
     //DEIXA CURSOR INVISï¿½VEL
 
+        CONSOLE_CURSOR_INFO info;
         info.bVisible = false;
         SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
         textColor(WHITE, _BLACK);
         system("cls");
-             
-
-
-
-
 
     /* EXCLUIR ALGO
+
                 system("cls");
 
                     printf("Digite o codigo do produto a ser removido: ");
@@ -431,7 +479,7 @@ int realizarVenda() {
 
         int opcAlterarRegist;
         
-    //MONTA A TELA ONDE IRï¿½ PEGAR O Cï¿½DIGO
+    //MONTA A TELA ONDE IRÁ PEGAR O CÓDIGO
 
         
        

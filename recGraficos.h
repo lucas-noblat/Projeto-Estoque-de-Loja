@@ -56,6 +56,7 @@ enum background_collor {
 
 void textColor(int letras, int fundo);
 void gotoxy(int x, int y);
+void linhaReta (int x1, int x2, int y, int letter_collor, int background_collor);
 
 
 

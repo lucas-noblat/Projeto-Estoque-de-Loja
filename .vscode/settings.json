@@ -8,6 +8,7 @@
         "windows.h": "c",
         "locale.h": "c",
         "string.h": "c",
-        "lista.h": "c"
+        "lista.h": "c",
+        "time.h": "c"
     }
 }

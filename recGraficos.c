@@ -21,6 +21,35 @@ void linhaCol (int lin, int col) {
     SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
     
 }
+void linhaReta (int x1, int x2, int y, int letter_collor, int background_collor){
+
+//DEFINE O ENCODING PARA PRINTAR OS CARACTERES SEM NENHUM PROBLEMA
+
+    setlocale(LC_ALL, "C");
+    textColor(letter_collor, background_collor);
+
+//BORDA ESQUERDA DA RETA
+
+    linhaCol(y, x1);
+    printf("%c", 195);
+
+//CORPO DA RETA
+
+     for(int i = x1 + 1; i<=x2; i++){
+        linhaCol(y, i);
+        printf("%c", 196);
+   
+    }
+
+//BORDA DIREITA DA RETA
+
+        linhaCol(y, x2);
+        printf("%c", 180);
+
+    setlocale(LC_ALL, "Portuguese_Brazil");
+
+}
+
 
 void box(int lin1, int col1, int lin2, int col2, int cor_letra, int cor_fundo){
 
@@ -78,6 +107,8 @@ void box(int lin1, int col1, int lin2, int col2, int cor_letra, int cor_fundo){
 void textColor(int letras, int fundo) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), letras + fundo);
 }
+
+
 
 
 int menu (int lin1, int col1, int qtd, char lista[][40], int cor_letra, int cor_fundo){
