@@ -130,10 +130,10 @@ int adicionarProdutos() {
 
     //PRINTA AS PERGUNTAS E RECEBE AS RESPOSTAS
 
-        gotoxy(31, 9);printf("Digite o código do produto: ");
-        gotoxy(31, 12);printf("Digite o nome do produto: ");
-        gotoxy(31, 15);printf("Digite o preço do produto: ");
-        gotoxy(31, 18);printf("Digite a quantidade do produto: ");
+        gotoxy(31, 9);printf("Código do produto: ");
+        gotoxy(31, 12);printf("Nome do produto: ");
+        gotoxy(31, 15);printf("Preço do produto: ");
+        gotoxy(31, 18);printf("Quantidade do produto: ");
 
         //
 
@@ -150,7 +150,7 @@ int adicionarProdutos() {
 
     //RECEBE O CODIGO E FAZ A DEFESA
 
-        gotoxy(59, 9); fgets(codigo, 20, stdin); 
+        gotoxy(50, 9); fgets(codigo, 20, stdin); 
 
         if(codigo[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
             textColor(WHITE, _BLACK);
@@ -164,14 +164,14 @@ int adicionarProdutos() {
         while(1){
 
             if (ehNumero(codigo) ==0 || atoi(codigo) < 0) {
-                gotoxy(59, 9);
+                gotoxy(50, 9);
                 textColor(GREEN, _BLUE);
                 printf("Número inválido");
                 delay(2);
                 textColor(WHITE, _BLUE);
 
-                gotoxy(58, 9);  printf("                ");
-                gotoxy(59, 9); fgets(codigo, 20, stdin); 
+                gotoxy(49, 9);  printf("                ");
+                gotoxy(50, 9); fgets(codigo, 20, stdin); 
 
                 if(codigo[0] == '\n') {//PARA RETORNAR AO MENU PRINCIPAL
                         textColor(WHITE, _BLACK);
@@ -183,14 +183,14 @@ int adicionarProdutos() {
                     }
             
                 else if (buscaCodigo(&estoque, atoi(codigo))) {
-                    gotoxy(59, 9);
+                    gotoxy(50, 9);
                     textColor(GREEN, _BLUE);
                     printf("Código existente");
                     delay(2);
                     textColor(WHITE, _BLUE);
 
-                    gotoxy(58, 9);  printf("                 ");
-                    gotoxy(59, 9); fgets(codigo, 20, stdin);
+                    gotoxy(49, 9);  printf("                 ");
+                    gotoxy(50, 9); fgets(codigo, 20, stdin);
 
                     if(codigo[0] == '\n') {//PARA RETORNAR AO MENU PRINCIPAL
                         textColor(WHITE, _BLACK);
@@ -210,7 +210,7 @@ int adicionarProdutos() {
 
         //NOME -- NÃƒO TEM DEFESA NO NOME POIS O NOME PODE SER ACOMPANHADO DA PESAGEM 'ARROZ 5KG'
 
-            gotoxy(57, 12); fgets(regist.nome, 50, stdin);  
+            gotoxy(48, 12); fgets(regist.nome, 50, stdin);  
 
               if(regist.nome[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
                 textColor(WHITE, _BLACK);
@@ -223,7 +223,7 @@ int adicionarProdutos() {
 
         //RECEBE O PRECO E FAZ A DEFESA
 
-            gotoxy(59,15); fgets(preco, 10, stdin);
+            gotoxy(50,15); fgets(preco, 10, stdin);
             
               if(preco[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
                 textColor(WHITE, _BLACK);
@@ -234,14 +234,14 @@ int adicionarProdutos() {
              preco[strlen(preco) - 1] = '\0';
 
             while (!ehNumero(preco) || atof(preco) <= 0) {
-                gotoxy(59, 15);
+                gotoxy(50, 15);
                 textColor(GREEN, _BLUE);
                 printf("Número inválido");
                 delay(2);
                 textColor(WHITE, _BLUE);
 
-                gotoxy(58, 15);  printf("                ");
-                gotoxy(59, 15); fgets(preco, 10, stdin);
+                gotoxy(49, 15);  printf("                ");
+                gotoxy(50, 15); fgets(preco, 10, stdin);
 
                 if(preco[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
                     textColor(WHITE, _BLACK);
@@ -256,7 +256,7 @@ int adicionarProdutos() {
 
         //RECEBE QUANTIDADE E FAZ A DEFESA
 
-            gotoxy(63,18); fgets(quantidade, 10, stdin);
+            gotoxy(54,18); fgets(quantidade, 10, stdin);
             
             if(quantidade[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
                 textColor(WHITE, _BLACK);
@@ -267,14 +267,14 @@ int adicionarProdutos() {
 
 
             while (!ehNumero(quantidade) || atoi(quantidade) < 0) {
-                gotoxy(63, 18);
+                gotoxy(54, 18);
                 textColor(GREEN, _BLUE);
                 printf("Numero invalido");
                 delay(2);
                 textColor(WHITE, _BLUE);
 
-                gotoxy(63, 18);  printf("                ");
-                gotoxy(63, 18); fgets(quantidade, 10, stdin);
+                gotoxy(54, 18);  printf("                ");
+                gotoxy(54, 18); fgets(quantidade, 10, stdin);
 
                 if(quantidade[0] == '\n'){//PARA RETORNAR AO MENU PRINCIPAL
                     textColor(WHITE, _BLACK);
