@@ -59,5 +59,13 @@ void gotoxy(int x, int y);
 void linhaReta (int x1, int x2, int y, int letter_collor, int background_collor);
 
 
+//FUNÇÕES GUI
+
+    void mainBox_realizarVenda();
+    void carBox_realizarVendas();
+    void checkBox_realizarVenda();
+
+
+
 
 #endif

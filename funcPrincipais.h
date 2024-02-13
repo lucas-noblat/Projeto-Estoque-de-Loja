@@ -23,12 +23,15 @@
     int realizarVenda ();
     int alterarRegistro();
 
+
+
 //FUNÇÕES AUXILIARES
 
     int defesaCodigo (char codigo[], char message[], int x, int y, PONT foundProduct);
     void delay(int segundos);
     int ehNumero (char palavra[]);
     int qntsDigitos(int x);
+    
 
 
 

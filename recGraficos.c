@@ -189,7 +189,60 @@ void gotoxy(int x, int y){
     dwPos.Y = y;
 
     h = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleCursorPosition(h, dwPos);
+    SetConsoleCursorPosition(h, dwPos);}
+
+
+
+
+
+
+//FUNÇÕES GUI
+
+
+
+void mainBox_realizarVenda(){
+
+
+//MONTA A BOX AZUL DA ESQUERDA
+
+        
+    box(9, 37, 28, 75, WHITE, _BLUE);
+
+//MONTAGEM DA BOX QUE RECOLHE OS DADOS
+
+    //Primeira box branca
+        box(15, 44, 17, 68, WHITE, _WHITE);
+
+        
+    //ESCREVE AS INFORMAÇÕES EXIGIDAS
+
+        textColor(WHITE, _BLUE);
+        gotoxy(47, 12);printf("CÓDIGO DO PRODUTO");
+        gotoxy(43, 19); printf("QUANTIDADE A SER VENDIDA");
+
+
+    //SEGUNDA BOX BRANCA
+
+        box(22, 44, 24, 68, WHITE, _WHITE);
+    
+
+       
+
+
 
 
 }
+
+
+void carBox_realizarVendas(int height){
+
+    //MONTA A BOX DO CARRINHO
+
+        box(9, 78, height, 100, BLACK, _WHITE);
+        linhaReta(78, 100, 11, BLACK, _WHITE);
+        gotoxy(85, 9); printf("CARRINHO");
+
+
+}
+
+

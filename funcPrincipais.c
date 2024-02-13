@@ -88,12 +88,14 @@ int ehNumero (char palavra[]){
 
     for (int i = 0; i < strlen(palavra); i++){
 
-        if (!isdigit(palavra[i]) &&palavra[i] != ',' &&  palavra[i] != '.') res = 0;
+        if (palavra[0] == '-') return 0; 
+        else if (!isdigit(palavra[i]) &&palavra[i] != ',' &&  palavra[i] != '.') res = 0;
 
     }
 
     return res;
 }
+
 
 
 
@@ -363,81 +365,74 @@ void exibirEstoque() {
 
 int realizarVenda() {
 
+
     CONSOLE_CURSOR_INFO info;
-    char codigo [20];
+    char codigo [20], quantidade[20];
     PONT produtoAchado;
-
-    //LIMPA A TELA DO CONSOLE
-        textColor(WHITE, _BLACK);
-        system("cls");
-        
-    //MONTA A BOX AZUL DA ESQUERDA
-
-        
-        box(9, 37, 28, 75, WHITE, _BLUE);
-       
+    LISTA carrinho;
 
 
+//CONFERE SE TEM ALGO NO ESTOQUE OU NÃO
 
-    //CONFERE SE TEM ALGO NO ESTOQUE OU NÃO
-
-        if(estoque.tam == 0){ 
+    if(estoque.tam == 0){ 
             gotoxy(49, 14);
             printf("Lista Vazia!");
             delay(4);
             textColor(WHITE, _BLACK);
-            system("cls");
+            system("cls");} 
 
-        } else {
+    else {
 
-//MONTAGEM DA BOX QUE RECOLHE OS DADOS
-
-    //Primeira box branca
-        box(15, 44, 17, 68, WHITE, _WHITE);
-
-       
-    //ESCREVE AS INFORMAÇÕES EXIGIDAS
-
-        textColor(WHITE, _BLUE);
-        gotoxy(47, 12);printf("CÓDIGO DO PRODUTO");
-        gotoxy(43, 19); printf("QUANTIDADE A SER VENDIDA");
-
-
-    //SEGUNDA BOX BRANCA
-
-        box(22, 44, 24, 68, WHITE, _WHITE);
- 
-
- 
- 
 
    //MONTAGEM DA INTERFACE
         
-        while(1){
+    while(1){
 
-            //MONTA A BOX DO CARRINHO
-
-            box(9, 78, 28, 100, BLACK, _WHITE);
-            linhaReta(78, 100, 11, BLACK, _WHITE);
-
-            gotoxy(85, 9); printf("CARRINHO");
+        mainBox_realizarVenda();
+        carBox_realizarVendas(28);
 
     //DEIXA CURSOR VISï¿½VEL
 
 
-            info.bVisible = true;
-            info.dwSize = 100;
-            SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+        info.bVisible = true;
+        info.dwSize = 100;
+        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
 
-    
-            textColor(BLACK, _WHITE);
-            gotoxy(44, 15); fgets(codigo, 20, stdin); 
+    //RECEBE O CODIGO E FAZ O PRIMEIRO CODIGO E JA FAZ A DEFESA
+
+        textColor(BLACK, _WHITE);
+        gotoxy(44, 15); fgets(codigo, 20, stdin); 
 
 
-            if (defesaCodigo(codigo, "CÓDIGO DO PRODUTO", 44, 15, produtoAchado) == 0) return 0;
+        if (defesaCodigo(codigo, "CÓDIGO DO PRODUTO", 44, 15, produtoAchado) == 0) return 0;
 
+        else {
+            
+     
+            while(1){
+
+                textColor(BLACK, _WHITE);
+                gotoxy(44, 22); fgets(quantidade, 20, stdin); quantidade[strlen(quantidade) - 1] = '\0';
+                if (ehNumero(quantidade)) break;
+                else {
+                
+                gotoxy(44,22); printf("                    ");
+
+                textColor(RED, _WHITE);
+
+                gotoxy(48, 22); printf("Número Inválido");
+                delay(2);
+                gotoxy(44,22); printf("                    ");
+
+                }
+                }
+            
+        } 
+            break;
+   
             }
 
+    
      
     //DEIXA CURSOR INVISï¿½VEL
 
@@ -447,23 +442,6 @@ int realizarVenda() {
         textColor(WHITE, _BLACK);
         system("cls");
 
-    /* EXCLUIR ALGO
-
-                system("cls");
-
-                    printf("Digite o codigo do produto a ser removido: ");
-                scanf("%d", &codigo);
-                removido = excluirLista(&estoque, codigo);
-                if (removido){
-                    printf("Elemento removido: %d", removido->reg.codigo);
-                    free(removido);
-                    getchar();
-                } else {
-                    printf("Elemento não esta na lista\n");
-                    getchar();
-                }
-                system("cls");
-                */
 }}
 
     int alterarRegistro(){
